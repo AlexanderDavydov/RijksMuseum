@@ -1,0 +1,67 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!--Top level DayNight theme to be used in AndroidManifest.xml-->
+    <style name="Theme.RijksMuseum" parent="Base.Theme.RijksMuseum" />
+
+    <!--Base custom theme which will be shared between both light and dark theme variants-->
+    <style name="Base.Theme.RijksMuseum" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
+
+        <!--Material color attributes (light theme) -->
+        <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->
+        <!--colorSecondary colors are most often used as accents on components, such as FABs and -->
+        <!--selection controls.-->
+
+        <item name="colorPrimary">@color/green</item>
+        <item name="colorPrimaryVariant">@color/green</item>
+        <item name="colorSecondary">@color/orange</item>
+        <item name="colorSecondaryVariant">@color/orange</item>
+
+        <!--colorBackground appears behind scrollable content and is used for the default window-->
+        <!--background. colorSurface is mapped to the surface of components such as cards, sheets-->
+        <!--and menus. colorError is used to indicate an error state for components such as-->
+        <!--text fields.-->
+        <item name="android:colorBackground">@color/white</item>
+        <item name="colorSurface">@color/white</item>
+        <item name="colorError">@color/error</item>
+        <!--"On" colors define how text, icons and strokes are colored in relation to the surface-->
+        <!--on which they appear.-->
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <item name="colorOnBackground">@color/white</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorOnError">@color/white</item>
+
+        <!--Material Typography attributes-->
+        <item name="textAppearanceHeadline1">@style/TextAppearance.RijksMuseum.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.RijksMuseum.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.RijksMuseum.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.RijksMuseum.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.RijksMuseum.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.RijksMuseum.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.RijksMuseum.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.RijksMuseum.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.RijksMuseum.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.RijksMuseum.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.RijksMuseum.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.RijksMuseum.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.RijksMuseum.Overline</item>
+
+        <!--Material shape attributes-->
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.RijksMuseum.SmallComponent
+        </item>
+        <item name="shapeAppearanceMediumComponent">
+            @style/ShapeAppearance.RijksMuseum.MediumComponent
+        </item>
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.RijksMuseum.LargeComponent
+        </item>
+        <!--Component styles-->
+        <item name="materialButtonStyle">@style/Widget.RijksMuseum.Button</item>
+    </style>
+
+</resources>

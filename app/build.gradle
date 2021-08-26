@@ -1,0 +1,64 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'kotlinx-serialization'
+}
+
+android {
+    compileSdk 30
+
+    defaultConfig {
+        applicationId "ru.alexandro.rijksmuseum"
+        minSdk 26
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+
+    implementation project(':data')
+    implementation project(':domain')
+
+    implementation viewDeps.values()
+    implementation supportDeps.values()
+    implementation lifecycleDeps.values()
+    implementation extensionsDeps.values()
+    implementation adapterDelegates.values()
+    implementation koinDeps.values()
+    implementation retrofitDeps.values()
+    implementation koinDeps.values()
+    implementation navDeps.values()
+
+    implementation kotlinDeps.values()
+    implementation coroutinesDeps.values()
+
+    implementation deps.values()
+
+    kapt apts.lifecycleExtApt
+    kapt apts.glideApt
+
+}

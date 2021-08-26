@@ -1,0 +1,8 @@
+<resources>
+
+    <dimen name="corner_radius_16dp">16dp</dimen>
+    <dimen name="corner_radius_12dp">12dp</dimen>
+
+    <dimen name="inset_0dp">0dp</dimen>
+
+</resources>
