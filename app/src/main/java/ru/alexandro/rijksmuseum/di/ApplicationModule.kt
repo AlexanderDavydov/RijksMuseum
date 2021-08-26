@@ -1,9 +1,10 @@
 package ru.alexandro.rijksmuseum.di
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
@@ -23,7 +24,21 @@ internal val applicationModule = module {
 
 private fun okHttp(): OkHttpClient {
     return OkHttpClient.Builder()
-        .addInterceptor(HttpLoggingInterceptor { Timber.d(it) })
+        .addInterceptor(
+            HttpLoggingInterceptor { Timber.i(it) }.apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }
+        )
+        .addInterceptor { chain ->
+            val url = chain.request().url.newBuilder()
+                .addQueryParameter("key", "0fiuZFh4")
+                .build()
+
+            val request =
+                chain.request().newBuilder().url(url).build()
+
+            chain.proceed(request)
+        }
         .connectTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
         .readTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
         .writeTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
@@ -31,12 +46,15 @@ private fun okHttp(): OkHttpClient {
 }
 
 
+private val json = Json { ignoreUnknownKeys = true }
+
 @OptIn(ExperimentalSerializationApi::class)
 private fun retrofit(okHttpClient: OkHttpClient): Retrofit =
     Retrofit.Builder()
-        .addConverterFactory(Json.asConverterFactory(MediaType.get("application/json")))
-        .client(okHttpClient)
         .baseUrl(BASE_URL)
+        .client(okHttpClient)
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .addConverterFactory(json.asConverterFactory("application/json".toMediaType()))
         .build()
 
 private const val BASE_URL = "https://www.rijksmuseum.nl"

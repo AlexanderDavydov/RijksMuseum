@@ -5,4 +5,6 @@
 
     <dimen name="inset_0dp">0dp</dimen>
 
+    <dimen name="margin_8dp">8dp</dimen>
+
 </resources>

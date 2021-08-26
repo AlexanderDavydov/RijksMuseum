@@ -2,7 +2,9 @@ package ru.alexandro.data.repository
 
 import ru.alexandro.data.api.ArtObjectApi
 import ru.alexandro.data.mapping.toArtObject
+import ru.alexandro.data.mapping.toArtObjectListData
 import ru.alexandro.domain.model.ArtObject
+import ru.alexandro.domain.model.ArtObjectListData
 import ru.alexandro.domain.repository.ArtObjectRepository
 
 class ArtObjectRepositoryImpl(
@@ -14,10 +16,9 @@ class ArtObjectRepositoryImpl(
      */
     val culture = "en"
 
-    override suspend fun getArtObjectList(pageStart: Int, pageSize: Int): List<ArtObject> {
+    override suspend fun getArtObjectList(pageStart: Int, pageSize: Int): ArtObjectListData {
         return artObjectApi.getArtObjectList(culture, pageStart, pageSize)
             .await()
-            .artObjects
-            .map { it.toArtObject() }
+            .toArtObjectListData()
     }
 }

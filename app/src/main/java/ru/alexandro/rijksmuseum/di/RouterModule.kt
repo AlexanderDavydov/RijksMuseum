@@ -5,12 +5,9 @@ import com.github.terrakok.cicerone.Router
 import org.koin.dsl.module
 
 internal val routerModule = module {
-
     single { cicerone() }
     single { getNavigatorHolder(get()) }
     single { getRouter(get()) }
-
-
 }
 
 private fun cicerone() = Cicerone.create()
