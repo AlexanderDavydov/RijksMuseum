@@ -17,7 +17,7 @@ interface ArtObjectListViewModel : BaseViewModel<ArtObjectListViewState, ArtObje
 
     sealed class ArtObjectListEvent : BaseEvent {
         object LoadArtObjectList : ArtObjectListEvent()
-        data class ArtObjectClick(val id: String): ArtObjectListEvent()
+        data class ArtObjectClick(val objectNumber: String): ArtObjectListEvent()
         data class ShareArtObject(val webLink: String) : ArtObjectListEvent()
     }
 }

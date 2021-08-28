@@ -14,26 +14,26 @@ import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewMod
 
 class ArtObjectAdapter(
     private val action: (ArtObjectListEvent) -> Unit
-) : PagingDataAdapter<ArtObject, ArtObjectAdapter.CharacterViewHolder>(ArtObjectComparator) {
+) : PagingDataAdapter<ArtObject, ArtObjectAdapter.ArtObjectViewHolder>(ArtObjectComparator) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
-        CharacterViewHolder(
+        ArtObjectViewHolder(
             ItemArtObjectBinding.inflate(LayoutInflater.from(parent.context), parent, false),
             action
         )
 
-    override fun onBindViewHolder(holder: CharacterViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ArtObjectViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
 
-    inner class CharacterViewHolder(
+    inner class ArtObjectViewHolder(
         private val binding: ItemArtObjectBinding,
         private val action: (ArtObjectListEvent) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: ArtObject) = with(binding) {
 
-            root.setOnClickListener { action(ArtObjectClick(item.id)) }
+            root.setOnClickListener { action(ArtObjectClick(item.objectNumber)) }
 
             content.apply {
 

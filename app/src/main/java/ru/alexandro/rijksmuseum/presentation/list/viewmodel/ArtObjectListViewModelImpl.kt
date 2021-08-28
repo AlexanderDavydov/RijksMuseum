@@ -19,6 +19,7 @@ import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewMod
 import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewModel.ArtObjectListViewState
 import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewModel.ArtObjectListViewState.ArtObjectPage
 import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewModel.ArtObjectListViewState.Loading
+import ru.alexandro.rijksmuseum.router.Fragments
 import ru.alexandro.rijksmuseum.router.ShareAction
 
 class ArtObjectListViewModelImpl(
@@ -48,7 +49,7 @@ class ArtObjectListViewModelImpl(
         when (event) {
             is LoadArtObjectList -> longRunning { handleLoadArtObjectList() }
             is ShareArtObject -> handleShareArtObject(event.webLink)
-            is ArtObjectClick -> handleArtObjectClick(event.id)
+            is ArtObjectClick -> handleArtObjectClick(event.objectNumber)
         }
     }
 
@@ -70,7 +71,7 @@ class ArtObjectListViewModelImpl(
         router.navigateTo(ShareAction(webLink))
     }
 
-    private fun handleArtObjectClick(id: String) {
-        // router.navigateTo(ArtObjectDetail(id))
+    private fun handleArtObjectClick(objectNumber: String) {
+        router.navigateTo(Fragments.ArtObjectDetail(objectNumber))
     }
 }

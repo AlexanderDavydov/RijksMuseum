@@ -13,6 +13,7 @@ fun ArtObjectResponse.toArtObjectListData(): ArtObjectListData = ArtObjectListDa
 
 fun RawArtObject.toArtObject() = ArtObject(
     id = id,
+    objectNumber = objectNumber,
     title = title,
     longTitle = longTitle,
     imageUrl = this.webImage.url,
