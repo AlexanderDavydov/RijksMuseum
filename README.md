@@ -9,3 +9,8 @@
 * ### Kotlin serialisation for json parsing
 * ### Jetpack - ViewModel/Paging/SaveStateHandle
 * ### Koin for DI
+
+
+
+[You can see video in media folder](https://github.com/AlexanderDavydov/RijksMuseum/tree/develop/media)
+
