@@ -10,6 +10,7 @@ import com.github.terrakok.cicerone.androidx.Creator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import ru.alexandro.rijksmuseum.presentation.detail.ArtObjectDetailFragment
 import ru.alexandro.rijksmuseum.presentation.list.ArtObjectListFragment
+import ru.alexandro.rijksmuseum.presentation.listsections.ArtObjectSectionListFragment
 
 
 sealed class Fragments(
@@ -24,6 +25,10 @@ sealed class Fragments(
 
     object ArtObjectList : Fragments(
         fragmentCreator = { ArtObjectListFragment() }
+    )
+
+    object ArtObjectSectionList : Fragments(
+        fragmentCreator = { ArtObjectSectionListFragment() }
     )
 
     class ArtObjectDetail(objectNumber: String) : Fragments(

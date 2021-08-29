@@ -16,7 +16,6 @@ abstract class BaseActivity<E : BaseEvent, VM : BaseViewModel<VS, E>, VB : ViewB
     @LayoutRes contentLayoutId: Int
 ) : AppCompatActivity(contentLayoutId), BaseView<E, VM, VB, VS> {
 
-
     abstract override val viewModel: VM
 
     abstract override val binding: VB

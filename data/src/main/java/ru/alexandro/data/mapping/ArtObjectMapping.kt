@@ -16,6 +16,7 @@ fun RawArtObject.toArtObject() = ArtObject(
     objectNumber = objectNumber,
     title = title,
     longTitle = longTitle,
-    imageUrl = this.webImage.url,
-    webLink = links.web
+    imageUrl = this.webImage.url ?: "",
+    webLink = links.web,
+    principalOrFirstMaker = principalOrFirstMaker
 )

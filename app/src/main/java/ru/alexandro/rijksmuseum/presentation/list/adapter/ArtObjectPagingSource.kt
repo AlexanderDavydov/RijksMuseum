@@ -4,9 +4,11 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import ru.alexandro.domain.model.ArtObject
 import ru.alexandro.domain.model.ArtObjectListData
+import timber.log.Timber
 
-class ArtObjectPagungSource(
-    private val pageLoader: suspend (Int, Int) -> ArtObjectListData
+class ArtObjectPagingSource(
+    private val pageLoader: suspend (Int, Int) -> ArtObjectListData,
+    private val errorHandler: (e: Throwable) -> Unit,
 ) : PagingSource<Int, ArtObject>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArtObject> {
@@ -22,6 +24,7 @@ class ArtObjectPagungSource(
                 nextKey = if (itemsCountLeft <= 0) null else offset + result.artObjects.size
             )
         } catch (e: Throwable) {
+            errorHandler(e)
             LoadResult.Error(throwable = e)
         }
     }

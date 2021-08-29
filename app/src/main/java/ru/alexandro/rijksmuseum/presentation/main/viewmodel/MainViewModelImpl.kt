@@ -34,7 +34,7 @@ class MainViewModelImpl(
         // do any additional async work before main screen initialisation
 
         // set main fragment before splash closed
-        router.newRootScreen(Fragments.ArtObjectList)
+        router.newRootScreen(Fragments.ArtObjectSectionList)
 
         // for smooth transition waiting for 2 seconds
         delay(2000)

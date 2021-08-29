@@ -5,10 +5,12 @@ import org.koin.dsl.module
 import ru.alexandro.rijksmuseum.presentation.detail.viewmodel.ArtObjectDetailViewModel
 import ru.alexandro.rijksmuseum.presentation.detail.viewmodel.ArtObjectDetailViewModelImpl
 import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewModelImpl
+import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModelImpl
 import ru.alexandro.rijksmuseum.presentation.main.viewmodel.MainViewModelImpl
 
 internal val viewModelModules = module {
     viewModel { MainViewModelImpl(get()) }
     viewModel { ArtObjectListViewModelImpl(get(), get()) }
     viewModel { ArtObjectDetailViewModelImpl(get(), get()) }
+    viewModel { ArtObjectSectionListViewModelImpl(get(), get()) }
 }

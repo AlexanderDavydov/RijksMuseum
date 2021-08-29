@@ -6,5 +6,6 @@ data class ArtObject(
     val title: String,
     val longTitle: String,
     val imageUrl: String,
-    val webLink: String
+    val webLink: String,
+    val principalOrFirstMaker: String
 )

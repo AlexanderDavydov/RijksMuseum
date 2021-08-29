@@ -1,4 +1,4 @@
-package ru.alexandro.rijksmuseum.presentation.list.viewmodel
+package ru.alexandro.rijksmuseum.presentation.listsections.viewmodel
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -13,26 +13,27 @@ import ru.alexandro.domain.model.ArtObjectListData
 import ru.alexandro.domain.usecase.artobject.RetrieveArtObjectListUseCase
 import ru.alexandro.rijksmuseum.base.viewmodel.BaseViewModelImpl
 import ru.alexandro.rijksmuseum.extentions.observe
-import ru.alexandro.rijksmuseum.presentation.list.adapter.ArtObjectPagingSource
-import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewModel.ArtObjectListEvent
-import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewModel.ArtObjectListEvent.*
-import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewModel.ArtObjectListViewState
-import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewModel.ArtObjectListViewState.ArtObjectPage
-import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectListViewModel.ArtObjectListViewState.Loading
+import ru.alexandro.rijksmuseum.presentation.listsections.adapter.ArtObjectItemPagingSource
+import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListEvent
+import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListEvent.ArtObjectClick
+import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListEvent.LoadArtObjectList
+import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListViewState
+import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListViewState.ArtObjectPage
+import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListViewState.Loading
 import ru.alexandro.rijksmuseum.router.Fragments
 import ru.alexandro.rijksmuseum.router.ShareAction
 
-class ArtObjectListViewModelImpl(
+class ArtObjectSectionListViewModelImpl(
     savedState: SavedStateHandle,
     private val retrieveArtObjectListUseCase: RetrieveArtObjectListUseCase
-) : BaseViewModelImpl<ArtObjectListViewState, ArtObjectListEvent>(savedState),
-    ArtObjectListViewModel {
+) : BaseViewModelImpl<ArtObjectSectionListViewState, ArtObjectSectionListEvent>(savedState),
+    ArtObjectSectionListViewModel {
 
     companion object {
         const val DEFAULT_PAGE_SIZE = 10
     }
 
-    override val viewState = MutableStateFlow<ArtObjectListViewState>(Loading)
+    override val viewState = MutableStateFlow<ArtObjectSectionListViewState>(Loading)
 
     val pager = Pager(
         PagingConfig(
@@ -40,7 +41,7 @@ class ArtObjectListViewModelImpl(
             initialLoadSize = DEFAULT_PAGE_SIZE,
         )
     ) {
-        ArtObjectPagingSource(
+        ArtObjectItemPagingSource(
             pageLoader = ::loadArtObjectList,
             errorHandler = { handleError(LoadArtObjectList, it) }
         )
@@ -50,11 +51,11 @@ class ArtObjectListViewModelImpl(
         sendEvent(LoadArtObjectList)
     }
 
-    override suspend fun handleEvent(event: ArtObjectListEvent) {
+    override suspend fun handleEvent(event: ArtObjectSectionListEvent) {
         when (event) {
             is LoadArtObjectList -> longRunning { handleLoadArtObjectList() }
-            is ShareArtObject -> handleShareArtObject(event.webLink)
             is ArtObjectClick -> handleArtObjectClick(event.objectNumber)
+            is ArtObjectSectionListEvent.ShareArtObject -> handleShareArtObject(event.webLink)
         }
     }
 

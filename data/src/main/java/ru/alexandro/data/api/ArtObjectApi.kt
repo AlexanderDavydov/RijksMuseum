@@ -13,7 +13,9 @@ interface ArtObjectApi {
     fun getArtObjectList(
         @Path("culture") culture: String,
         @Query("p") p: Int,
-        @Query("pa") pa: Int
+        @Query("pa") pa: Int,
+        @Query("s") s: String = "artist",
+        @Query("imgonly") imgOnly: Boolean = true
     ): Deferred<ArtObjectResponse>
 
     @GET("api/{culture}/collection/{object-number}")

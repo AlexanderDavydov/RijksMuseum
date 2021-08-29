@@ -4,6 +4,7 @@ import kotlinx.coroutines.Job
 import java.util.*
 import kotlin.reflect.KClass
 
+
 class EventHandler<TEvent : Any>(
     private val commonHandler: (TEvent) -> Job
 ) : IEventHandler<TEvent> {
