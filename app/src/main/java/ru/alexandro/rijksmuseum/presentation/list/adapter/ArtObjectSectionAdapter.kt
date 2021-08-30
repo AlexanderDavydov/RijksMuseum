@@ -1,4 +1,4 @@
-package ru.alexandro.rijksmuseum.presentation.listsections.adapter
+package ru.alexandro.rijksmuseum.presentation.list.adapter
 
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
@@ -16,9 +16,9 @@ import com.bumptech.glide.request.target.Target
 import ru.alexandro.domain.model.ArtObject
 import ru.alexandro.rijksmuseum.databinding.ItemArtObjectBinding
 import ru.alexandro.rijksmuseum.databinding.ItemArtObjectHeaderBinding
-import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListEvent
-import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListEvent.ArtObjectClick
-import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListEvent.ShareArtObject
+import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListEvent
+import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListEvent.ArtObjectClick
+import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListEvent.ShareArtObject
 
 class ArtObjectSectionAdapter(
     private val action: (ArtObjectSectionListEvent) -> Unit
@@ -30,7 +30,6 @@ class ArtObjectSectionAdapter(
         const val HeaderType = 0
         const val ItemType = 1
     }
-
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -56,7 +55,6 @@ class ArtObjectSectionAdapter(
     override fun onBindViewHolder(holder: BaseArtObjectItemViewHolder, position: Int) {
         getItem(position)?.let { holder.bind(it) }
     }
-
 
     inner class BaseArtObjectItemViewHolder(
         private val binding: ViewBinding,
@@ -86,27 +84,37 @@ class ArtObjectSectionAdapter(
 
                 loadingIndicator.isVisible = true
                 Glide.with(root)
-                        .load(item.imageUrl)
-                        .centerCrop()
-                        .listener(object : RequestListener<Drawable> {
-                            override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
-                                loadingIndicator.isVisible = false
-                                return false
-                            }
+                    .load(item.imageUrl)
+                    .centerCrop()
+                    .listener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(
+                            e: GlideException?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            loadingIndicator.isVisible = false
+                            return false
+                        }
 
-                            override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
-                                loadingIndicator.isVisible = false
-                                return false
-                            }
-                        })
-                        .into(imageView)
+                        override fun onResourceReady(
+                            resource: Drawable?,
+                            model: Any?,
+                            target: Target<Drawable>?,
+                            dataSource: DataSource?,
+                            isFirstResource: Boolean
+                        ): Boolean {
+                            loadingIndicator.isVisible = false
+                            return false
+                        }
+                    })
+                    .into(imageView)
 
                 name.text = item.title
                 shareButton.setOnClickListener { action(ShareArtObject(item.webLink)) }
             }
         }
     }
-
 
     object ArtObjectItemComparator : DiffUtil.ItemCallback<ArtObjectItem>() {
         override fun areItemsTheSame(oldItem: ArtObjectItem, newItem: ArtObjectItem): Boolean {

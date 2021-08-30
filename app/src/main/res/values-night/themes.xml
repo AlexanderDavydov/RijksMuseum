@@ -1,9 +1,8 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <!-- Base application theme. -->
     <style name="Theme.RijksMuseum" parent="Base.Theme.RijksMuseum">
 
         <item name="android:windowLightStatusBar">false</item>
-
 
         <!--Material color attributes (light theme) -->
         <!--colorPrimary colors map to components and elements, such as app bars and buttons. -->

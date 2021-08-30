@@ -8,6 +8,9 @@ import ru.alexandro.rijksmuseum.base.event.BaseEvent
 import ru.alexandro.rijksmuseum.base.view.BaseViewState
 import kotlin.reflect.KClass
 
+/**
+ * Common Interface to work with View Model
+ */
 interface BaseViewModel<VS : BaseViewState, E : BaseEvent> : KoinComponent {
 
     val viewState: StateFlow<VS>
@@ -22,7 +25,7 @@ interface BaseViewModel<VS : BaseViewState, E : BaseEvent> : KoinComponent {
     /**
      * Method to send event to view model's event channel.
      *
-     * @return true if event was sent and false if wasn't.
+     * @return true if event was sent, false otherwise
      */
     fun sendEvent(event: E): Boolean
 
@@ -30,5 +33,4 @@ interface BaseViewModel<VS : BaseViewState, E : BaseEvent> : KoinComponent {
      * Method to cancel event from event queue.
      */
     fun <Type : E> cancelEvent(event: KClass<Type>)
-
 }

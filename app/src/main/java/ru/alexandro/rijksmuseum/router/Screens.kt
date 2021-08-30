@@ -9,23 +9,19 @@ import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.Creator
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 import ru.alexandro.rijksmuseum.presentation.detail.ArtObjectDetailFragment
-import ru.alexandro.rijksmuseum.presentation.list.ArtObjectListFragment
-import ru.alexandro.rijksmuseum.presentation.listsections.ArtObjectSectionListFragment
+import ru.alexandro.rijksmuseum.presentation.list.ArtObjectSectionListFragment
 
-
+/**
+ * Common implementation for fragments screens
+ */
 sealed class Fragments(
     private val args: Bundle = Bundle.EMPTY,
     override val clearContainer: Boolean = true,
     private val fragmentCreator: Creator<FragmentFactory, Fragment>
 ) : FragmentScreen {
 
-
     override fun createFragment(factory: FragmentFactory): Fragment =
         fragmentCreator.create(factory).apply { arguments = args }
-
-    object ArtObjectList : Fragments(
-        fragmentCreator = { ArtObjectListFragment() }
-    )
 
     object ArtObjectSectionList : Fragments(
         fragmentCreator = { ArtObjectSectionListFragment() }
@@ -41,6 +37,9 @@ sealed class Fragments(
     }
 }
 
+/**
+ * Ability to share URl using system share dialog
+ */
 fun ShareAction(url: String) = ActivityScreen {
     Intent.createChooser(
         Intent(Intent.ACTION_SEND).apply {

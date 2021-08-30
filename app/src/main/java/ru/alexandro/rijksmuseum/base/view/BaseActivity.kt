@@ -8,10 +8,16 @@ import androidx.viewbinding.ViewBinding
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
 import org.koin.android.ext.android.inject
+import ru.alexandro.rijksmuseum.R
 import ru.alexandro.rijksmuseum.base.event.BaseEvent
 import ru.alexandro.rijksmuseum.base.viewmodel.BaseViewModel
 import ru.alexandro.rijksmuseum.extentions.observe
+import ru.alexandro.rijksmuseum.view.extensions.showClosableSnackbar
 
+/**
+ * Abstract Base Activity implementation encapsulates
+ * common event and error handling methods from the view model.
+ */
 abstract class BaseActivity<E : BaseEvent, VM : BaseViewModel<VS, E>, VB : ViewBinding, VS : BaseViewState>(
     @LayoutRes contentLayoutId: Int
 ) : AppCompatActivity(contentLayoutId), BaseView<E, VM, VB, VS> {
@@ -26,11 +32,11 @@ abstract class BaseActivity<E : BaseEvent, VM : BaseViewModel<VS, E>, VB : ViewB
 
     abstract val navigator: Navigator
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         viewModel.viewState.observe(lifecycleScope) { handleViewState(it) }
+        viewModel.error.observe(lifecycleScope) { handleError(it) }
     }
 
     override fun onResume() {
@@ -43,6 +49,10 @@ abstract class BaseActivity<E : BaseEvent, VM : BaseViewModel<VS, E>, VB : ViewB
         navigatorHolder.removeNavigator()
     }
 
-    fun sendEvent(event: E) = viewModel.sendEvent(event)
+    private fun handleError(error: Throwable) {
+        val errorString = error.message ?: getString(R.string.error_unknown)
+        binding.root.showClosableSnackbar(errorString)
+    }
 
+    fun sendEvent(event: E) = viewModel.sendEvent(event)
 }

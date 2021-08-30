@@ -2,6 +2,9 @@ package ru.alexandro.data.mapping.response
 
 import kotlinx.serialization.Serializable
 
+/**
+ * Raw representation of Art Object List structure response
+ */
 @Serializable
 data class ArtObjectResponse(
     val count: Int,

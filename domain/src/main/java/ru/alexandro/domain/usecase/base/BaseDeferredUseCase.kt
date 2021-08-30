@@ -4,6 +4,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 
+/**
+ * Base implementation for use case use Deferred as a source
+ */
 abstract class BaseDeferredUseCase<Params, Result> :
     BaseUseCase<Deferred<Result>, Params, Result>() {
 

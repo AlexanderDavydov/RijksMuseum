@@ -5,7 +5,5 @@ import ru.alexandro.data.repository.ArtObjectRepositoryImpl
 import ru.alexandro.domain.repository.ArtObjectRepository
 
 internal val repositoryModule = module {
-
     single<ArtObjectRepository> { ArtObjectRepositoryImpl(get()) }
-
 }

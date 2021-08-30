@@ -2,6 +2,6 @@ package ru.alexandro.rijksmuseum.base.event
 
 
 /**
- * Marker inteface for events
+ * Marker interface for events
  */
 interface BaseEvent

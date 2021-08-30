@@ -5,9 +5,6 @@ import android.view.View
 import com.google.android.material.snackbar.Snackbar
 import ru.alexandro.rijksmuseum.R
 
-
-fun View.showSnackbar(message: String) = makeSnackbar(message, Snackbar.LENGTH_SHORT)
-
 fun View.showClosableSnackbar(message: String) {
     makeSnackbar(message, Snackbar.LENGTH_INDEFINITE) {
         setAction(R.string.button_close) { dismiss() }

@@ -10,7 +10,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 fun <T> noReplyMutableSharedFlow() =
     MutableSharedFlow<T>(extraBufferCapacity = 5, onBufferOverflow = BufferOverflow.DROP_OLDEST)
 
-
 /**
  * Set/get value to the slow
  *

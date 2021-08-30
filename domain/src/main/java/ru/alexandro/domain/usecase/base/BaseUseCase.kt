@@ -20,5 +20,4 @@ abstract class BaseUseCase<Source : Job, Params, Result> : UseCase<Source, Param
      * Abstract method which will be run while execution.
      */
     protected abstract suspend fun run(params: Params?): Result
-
 }

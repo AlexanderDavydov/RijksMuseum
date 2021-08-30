@@ -5,9 +5,13 @@ import ru.alexandro.domain.model.ArtObjectDetail
 import ru.alexandro.domain.repository.ArtObjectRepository
 import ru.alexandro.domain.usecase.base.BaseDeferredUseCase
 
+/**
+ * Provides a detailed information about the art object
+ * params is the [objectNumber] for which information is requested
+ */
 class RetrieveArtObjectDetailUseCase(
     private val objectRepository: ArtObjectRepository
-    ) : BaseDeferredUseCase<String, ArtObjectDetail>() {
+) : BaseDeferredUseCase<String, ArtObjectDetail>() {
 
     override suspend fun run(params: String?): ArtObjectDetail {
         val objectNumber = params ?: throw QueryParamsException()

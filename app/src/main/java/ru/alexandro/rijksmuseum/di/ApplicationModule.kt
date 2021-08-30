@@ -15,12 +15,10 @@ import java.util.concurrent.TimeUnit
 
 const val REQUEST_TIMEOUT = 15L // seconds
 
-
 internal val applicationModule = module {
     single { okHttp() }
     single { retrofit(get()) }
 }
-
 
 private fun okHttp(): OkHttpClient {
     return OkHttpClient.Builder()
@@ -44,7 +42,6 @@ private fun okHttp(): OkHttpClient {
         .writeTimeout(REQUEST_TIMEOUT, TimeUnit.SECONDS)
         .build()
 }
-
 
 private val json = Json { ignoreUnknownKeys = true }
 

@@ -15,7 +15,6 @@ class MainViewModelImpl(
 
     override val viewState = MutableStateFlow<MainViewState>(MainViewState.Splash)
 
-
     override suspend fun handleEvent(event: MainEvent) {
          when (event) {
              is ViewReady -> handleShowScreen()

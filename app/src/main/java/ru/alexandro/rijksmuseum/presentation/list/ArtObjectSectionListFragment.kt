@@ -1,4 +1,4 @@
-package ru.alexandro.rijksmuseum.presentation.listsections
+package ru.alexandro.rijksmuseum.presentation.list
 
 import android.os.Bundle
 import android.view.View
@@ -10,13 +10,13 @@ import org.koin.androidx.viewmodel.ext.android.stateViewModel
 import ru.alexandro.rijksmuseum.R
 import ru.alexandro.rijksmuseum.base.view.BaseFragment
 import ru.alexandro.rijksmuseum.databinding.FragmentArtObjectListBinding
-import ru.alexandro.rijksmuseum.presentation.listsections.adapter.ArtObjectSectionAdapter
-import ru.alexandro.rijksmuseum.presentation.listsections.adapter.VerticalMarginItemDecorator
-import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel
-import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListViewState
-import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListViewState.ArtObjectPage
-import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListViewState.Loading
-import ru.alexandro.rijksmuseum.presentation.listsections.viewmodel.ArtObjectSectionListViewModelImpl
+import ru.alexandro.rijksmuseum.presentation.list.adapter.ArtObjectSectionAdapter
+import ru.alexandro.rijksmuseum.presentation.list.adapter.VerticalMarginItemDecorator
+import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectSectionListViewModel
+import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListViewState
+import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListViewState.ArtObjectPage
+import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectSectionListViewModel.ArtObjectSectionListViewState.Loading
+import ru.alexandro.rijksmuseum.presentation.list.viewmodel.ArtObjectSectionListViewModelImpl
 
 
 class ArtObjectSectionListFragment :
@@ -48,7 +48,6 @@ class ArtObjectSectionListFragment :
             )
         }
     }
-
 
     override fun handleViewState(viewState: ArtObjectSectionListViewState) {
         updateViewsVisibility(viewState)

@@ -33,7 +33,6 @@ class ArtObjectDetailFragment :
 
     private val infoBottomSheet by lazy { BottomSheetBehavior.from(binding.infoBottomSheetView) }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -67,7 +66,6 @@ class ArtObjectDetailFragment :
             applyInsetter { type(navigationBars = true) { margin() } }
         }
     }
-
 
     override fun handleViewState(viewState: ArtDetailViewState) {
         updateViewsVisibility(viewState)

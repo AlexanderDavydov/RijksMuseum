@@ -1,29 +1,13 @@
 package ru.alexandro.rijksmuseum.base.event
 
-import kotlinx.coroutines.Job
-import java.util.*
 import kotlin.reflect.KClass
 
+/**
+ * The interface contains basic methods for handling events
+ */
+interface EventHandler<TEvent : BaseEvent> {
 
-class EventHandler<TEvent : Any>(
-    private val commonHandler: (TEvent) -> Job
-) : IEventHandler<TEvent> {
+    suspend fun handleEvent(event: TEvent)
 
-    private val eventQueue: TreeMap<String, Job> by lazy { TreeMap<String, Job>() }
-
-    override suspend fun handleEvent(event: TEvent): Unit = with(event) {
-        val key = this::class.java.name
-        handleCommonEvent(event, key)
-    }
-
-    override fun <TType : TEvent> cancelEvent(event: KClass<TType>) {
-        eventQueue[event.java.name]?.cancel()
-    }
-
-    private fun handleCommonEvent(event: TEvent, id: String) {
-        commonHandler(event).also { job ->
-            eventQueue[id] = job
-            job.invokeOnCompletion { eventQueue.remove(id) }
-        }
-    }
+    fun <TType : TEvent> cancelEvent(event: KClass<TType>)
 }

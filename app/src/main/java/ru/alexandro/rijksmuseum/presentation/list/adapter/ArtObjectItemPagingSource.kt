@@ -1,12 +1,11 @@
-package ru.alexandro.rijksmuseum.presentation.listsections.adapter
+package ru.alexandro.rijksmuseum.presentation.list.adapter
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import ru.alexandro.domain.model.ArtObject
 import ru.alexandro.domain.model.ArtObjectListData
-import ru.alexandro.rijksmuseum.presentation.listsections.adapter.ArtObjectItem.ArtObjectItemData
-import ru.alexandro.rijksmuseum.presentation.listsections.adapter.ArtObjectItem.ArtObjectItemHeader
-import timber.log.Timber
+import ru.alexandro.rijksmuseum.presentation.list.adapter.ArtObjectItem.ArtObjectItemData
+import ru.alexandro.rijksmuseum.presentation.list.adapter.ArtObjectItem.ArtObjectItemHeader
 
 class ArtObjectItemPagingSource(
     private val pageLoader: suspend (Int, Int) -> ArtObjectListData,
@@ -23,8 +22,6 @@ class ArtObjectItemPagingSource(
             val itemsCountLeft = result.count - offset
 
             val items = buildItems(result.artObjects)
-
-            Timber.tag("xxx").i("sections: $sections")
 
             LoadResult.Page(
                 data = items,

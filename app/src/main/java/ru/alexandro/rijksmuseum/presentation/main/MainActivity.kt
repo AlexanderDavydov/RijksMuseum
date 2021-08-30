@@ -31,7 +31,6 @@ class MainActivity : BaseActivity<MainEvent, MainViewModel, ActivityMainBinding,
 
     override val navigator: Navigator = AppNavigator(this, R.id.container)
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

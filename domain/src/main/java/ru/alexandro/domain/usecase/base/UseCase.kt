@@ -26,5 +26,4 @@ interface UseCase<Source, Params> {
      * @return [Deferred]
      */
     fun executeAsync(coroutineScope: CoroutineScope, params: Params? = null): Source
-
 }

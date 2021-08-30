@@ -1,12 +1,15 @@
-package ru.alexandro.rijksmuseum.base
+package ru.alexandro.rijksmuseum.base.event
 
 import kotlinx.coroutines.Job
 import java.util.*
 import kotlin.reflect.KClass
 
-class EventHandler<TEvent : Any>(
+/**
+ * Simple Event Handler Implementation
+ */
+class EventHandlerImpl<TEvent : BaseEvent>(
     private val commonHandler: (TEvent) -> Job
-) : IEventHandler<TEvent> {
+) : EventHandler<TEvent> {
 
     private val eventQueue: TreeMap<String, Job> by lazy { TreeMap<String, Job>() }
 

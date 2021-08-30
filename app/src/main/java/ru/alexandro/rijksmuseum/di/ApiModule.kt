@@ -5,7 +5,5 @@ import retrofit2.Retrofit
 import ru.alexandro.data.api.ArtObjectApi
 
 internal val apiModule = module {
-
     factory { get<Retrofit>().create(ArtObjectApi::class.java) }
-
 }

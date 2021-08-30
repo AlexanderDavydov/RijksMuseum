@@ -13,17 +13,22 @@ import kotlinx.coroutines.flow.StateFlow
 import org.koin.core.component.inject
 import ru.alexandro.rijksmuseum.base.event.BaseEvent
 import ru.alexandro.rijksmuseum.base.event.EventHandler
-import ru.alexandro.rijksmuseum.base.event.IEventHandler
+import ru.alexandro.rijksmuseum.base.event.EventHandlerImpl
 import ru.alexandro.rijksmuseum.base.view.BaseViewState
 import ru.alexandro.rijksmuseum.extentions.noReplyMutableSharedFlow
 import timber.log.Timber
 import kotlin.reflect.KClass
 
+/**
+ * Common abstraction View Model Implementation
+ * Provides logic for event handling, errors propagation, apply the base router.
+ * Provides [longRunning] method for async work
+ */
 abstract class BaseViewModelImpl<VS : BaseViewState, E : BaseEvent>(
     val savedState: SavedStateHandle
 ) : ViewModel(), BaseViewModel<VS, E> {
 
-    private val eventHandler: IEventHandler<E> by lazy { EventHandler(::commonEventHandler) }
+    private val eventHandler: EventHandler<E> by lazy { EventHandlerImpl(::commonEventHandler) }
 
     override val error = noReplyMutableSharedFlow<Throwable>()
 
@@ -100,6 +105,4 @@ abstract class BaseViewModelImpl<VS : BaseViewState, E : BaseEvent>(
                 handleError(event, ex)
             }
         }
-
-
 }

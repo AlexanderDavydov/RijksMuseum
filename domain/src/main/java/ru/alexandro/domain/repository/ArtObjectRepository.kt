@@ -1,6 +1,5 @@
 package ru.alexandro.domain.repository
 
-import ru.alexandro.domain.model.ArtObject
 import ru.alexandro.domain.model.ArtObjectDetail
 import ru.alexandro.domain.model.ArtObjectListData
 
